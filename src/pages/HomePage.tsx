@@ -1,13 +1,9 @@
-import tw from 'tailwind-styled-components';
-
-const Container = tw.div`
-  
-`;
+import { GameOrganism } from '../components/organisms';
 
 export const HomePage = () => {
    return (
-      <Container>
-         <h1>This is the home page!</h1>
-      </Container>
+      <>
+         <GameOrganism />
+      </>
    );
 };
