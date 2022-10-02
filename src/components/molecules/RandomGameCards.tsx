@@ -2,13 +2,15 @@ import { useRef, useState, useEffect } from 'react';
 import tw from 'tailwind-styled-components';
 import styled from 'styled-components';
 import { numberStringWithZero, shuffleArray } from '../../utils';
-import { useOnLoadImages } from '../../hooks';
+import { useAppDispatch, useOnLoadImages } from '../../hooks';
 import { GameCard, WinnerCheckIcon } from '../atoms';
+import { selectCardById } from '../../store';
 
+// grid grid grid-cols-4 grid-flow-row
 const Container = tw.div`
    flex
    flex-wrap
-   justify-around
+   justify-center
    align-start
    gap-2
 `;
@@ -28,7 +30,6 @@ const InfoText = tw.div<{ $isRendering: boolean; $isActive: boolean }>`
    ${(props) => (props.$isRendering ? 'animate-bounce' : '')}
    ${(props) => (props.$isActive ? 'opacity-100' : 'opacity-0')}
    transition-opacity ease-out delay-300
-
    w-full
    h-full
    absolute
@@ -59,6 +60,7 @@ export const RandomGameCards = ({
    onGoodMatch,
    onBadMatch,
 }: RandomCardsProps) => {
+   const dispatch = useAppDispatch();
    const { isLoaded, checkImages } = useOnLoadImages();
    const secondsToMemorize = 5;
 
@@ -82,6 +84,8 @@ export const RandomGameCards = ({
                .includes(index)
          ) {
             setSelectedCards([...selectedCards, { id, index }]);
+         } else if (winnerCardIds.includes(id)) {
+            dispatch(selectCardById(id));
          }
       }
    };

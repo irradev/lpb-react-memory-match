@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
+import { useAppSelector } from '../../hooks';
 import { ScreenTitle } from '../atoms';
-import { MainMenu } from '../molecules';
+import { AsideInfoCard, MainMenu } from '../molecules';
 
 const FixContainer = tw.div`
    font-JosefinSans
@@ -53,6 +54,9 @@ const BodyContainer = tw.div`
 interface AsideContainerStyleProps {
    $width?: string;
    $margin: string;
+   $isShow: boolean;
+   $hiddenDirection: 'LEFT' | 'RIGHT';
+   $isFloat?: boolean;
 }
 const AsideContainer = tw.div<AsideContainerStyleProps>`
    flex-shrink-0
@@ -66,6 +70,26 @@ const AsideContainer = tw.div<AsideContainerStyleProps>`
    ${(p) => p.$margin && p.$margin}
    ${(p) => (p.$width ? 'w-56' : `w-full max-w-sm`)}
    rounded-md
+   mb-4
+   relative
+
+   transition-transform duration-300 ease-in-out
+   ${(props) =>
+      props.$isShow
+         ? `
+      translate-x-0
+   `
+         : `
+      ${
+         props.$hiddenDirection === 'LEFT'
+            ? '-translate-x-full'
+            : 'translate-x-full'
+      }
+   `}
+
+   ${(props) => props.$isFloat && 'absolute'}
+   ${(props) => (props.$hiddenDirection === 'LEFT' ? 'left-0' : 'right-0')}
+
 `;
 
 const OutletContainer = tw.div`
@@ -77,26 +101,42 @@ const OutletContainer = tw.div`
    max-h-full
    overflow-hidden
    relative
+   mr-6
    
 `;
 
 export const AppTemplate = () => {
+   const { isShowAsideInfo } = useAppSelector((state) => state.ui);
+
    return (
       <FixContainer>
          <MaxWidthContent>
             <FlexContainer>
                <TitleContainer>
-                  <ScreenTitle text="Player's Game" />
+                  <ScreenTitle text="--" />
                </TitleContainer>
 
                <BodyContainer>
-                  <AsideContainer $width={'xs'} $margin={'ml-3'}>
+                  <AsideContainer
+                     $width={'xs'}
+                     $margin={'ml-3'}
+                     $isShow={true}
+                     $hiddenDirection="LEFT"
+                  >
                      <MainMenu />
                   </AsideContainer>
                   <OutletContainer>
                      <Outlet />
                   </OutletContainer>
-                  <AsideContainer $margin={'mr-3'}>aside</AsideContainer>
+                  <AsideContainer
+                     $margin={'mr-3'}
+                     $isShow={isShowAsideInfo}
+                     $hiddenDirection="RIGHT"
+                     $isFloat={true}
+                  >
+                     <AsideInfoCard />
+                     <button>right</button>
+                  </AsideContainer>
                </BodyContainer>
             </FlexContainer>
          </MaxWidthContent>

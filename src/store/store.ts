@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { userSlice } from './';
+import { playersSlice, cardsSlice, uiSlice } from './';
 
 export const store = configureStore({
    reducer: {
+      players: playersSlice.reducer,
+      cards: cardsSlice.reducer,
+      ui: uiSlice.reducer,
       // jobs: jobSlice.reducer,
       // user: userSlice.reducer,
       // ui: uiSlice.reducer,

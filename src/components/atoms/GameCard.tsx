@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
+import { useAppSelector } from '../../hooks';
 
 interface GameCardStyleProps {
    $width: string;
@@ -46,8 +47,7 @@ interface GameCardProps {
    isActive: boolean;
 }
 export const GameCard = ({ imageUrl, isActive }: GameCardProps) => {
-   const backBackgroundCardImage =
-      'https://media.timeout.com/images/105798187/750/562/image.jpg';
+   const { selectedCollection } = useAppSelector((state) => state.cards);
 
    const cardSize = {
       width: 'w-36',
@@ -57,7 +57,10 @@ export const GameCard = ({ imageUrl, isActive }: GameCardProps) => {
       <Container $width={cardSize.width} $height={cardSize.height}>
          <ImageContainer isActive={isActive}>
             <Img src={imageUrl} $isActive={isActive} />
-            <Img src={backBackgroundCardImage} $isActive={!isActive} />
+            <Img
+               src={selectedCollection?.backgroundImage}
+               $isActive={!isActive}
+            />
          </ImageContainer>
       </Container>
    );

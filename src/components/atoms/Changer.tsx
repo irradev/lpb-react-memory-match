@@ -39,6 +39,12 @@ const Img = styled.img`
    width: 30px;
 `;
 
+const ItemBoxContainer = tw.div`
+   flex-grow
+   flex
+   justify-center
+   items-center
+`;
 const ItemBox = tw.div<{ $selected: boolean }>`
    ${(props) => (props.$selected ? 'block' : 'hidden')}
 `;
@@ -75,7 +81,9 @@ export const Changer = ({ direction, items, onSelect }: ChangerProps) => {
    };
 
    useEffect(() => {
-      onSelect(selected);
+      if (items.length > 0) {
+         onSelect(items[selected].value);
+      }
    }, [selected]);
 
    return (
@@ -86,7 +94,7 @@ export const Changer = ({ direction, items, onSelect }: ChangerProps) => {
          >
             <Img src={svgChevronDown} />
          </Button>
-         <div>
+         <ItemBoxContainer>
             {items.map((item, index) => (
                <ItemBox
                   key={`item_${direction}_${index}`}
@@ -95,7 +103,7 @@ export const Changer = ({ direction, items, onSelect }: ChangerProps) => {
                   {item.content}
                </ItemBox>
             ))}
-         </div>
+         </ItemBoxContainer>
          <Button
             onClick={() => handleSelect('RIGHT')}
             $position={direction === 'horizontal' ? 'RIGHT' : 'DOWN'}

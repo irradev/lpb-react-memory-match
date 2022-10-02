@@ -30,6 +30,7 @@ const GameWindowContainer = tw.div`
    w-full
    overflow-hidden
 `;
+// Todo FIX ERROR uncaught RandomGameCards, on change page before load all images.
 
 export const GameOrganism = () => {
    return (

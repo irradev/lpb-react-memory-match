@@ -2,7 +2,7 @@ import { CSSProperties, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
 
-import svgCheckCircle from '../../assets/svg/check_circle.svg';
+import { SvgIcon } from './SvgIcon';
 
 // transition-opacity delay-1000 ease
 const Container = tw.div<{ $isWinner: boolean }>`
@@ -11,10 +11,6 @@ const Container = tw.div<{ $isWinner: boolean }>`
    bg-white
    rounded-full
    shadow-lg
-`;
-const Img = styled.img`
-   filter: invert(40%) sepia(63%) saturate(3842%) hue-rotate(135deg)
-      brightness(105%) contrast(89%);
 `;
 
 interface WinnerCheckIconProps {
@@ -35,7 +31,7 @@ export const WinnerCheckIcon = ({ isWinner, styles }: WinnerCheckIconProps) => {
 
    return (
       <Container $isWinner={winner} style={styles ? { ...styles } : {}}>
-         <Img src={svgCheckCircle} />
+         <SvgIcon name="check-circle" color="GREEN" />
       </Container>
    );
 };

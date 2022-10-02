@@ -1,6 +1,12 @@
+export * from './Button';
 export * from './ButtonMenu';
 export * from './Changer';
 export * from './GameCard';
 export * from './GameWindow';
+export * from './InputText';
+export * from './Modal';
+export * from './ModalWindow';
 export * from './ScreenTitle';
+export * from './SvgIcon';
+export * as Viewport from './Viewport';
 export * from './WinnerCheckIcon';
