@@ -5,8 +5,10 @@ import svgCheckCircle from '../../assets/svg/check_circle.svg';
 import svgUserAdd from '../../assets/svg/user_add.svg';
 import svgTrash from '../../assets/svg/trash.svg';
 import svgErase from '../../assets/svg/erase.svg';
+import svgShapeCircle from '../../assets/svg/shape_circle.svg';
+import svgClose from '../../assets/svg/close.svg';
 
-type FilterColor = 'GREEN' | 'WHITE';
+type FilterColor = 'GREEN' | 'GREEN BOLD' | 'WHITE' | 'TERTIARY' | 'RED';
 
 const Img = styled.img<{ color?: FilterColor }>`
    ${(props) =>
@@ -17,6 +19,12 @@ const Img = styled.img<{ color?: FilterColor }>`
          `
          : props.color === 'WHITE'
          ? 'filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(2deg) brightness(105%) contrast(102%);'
+         : props.color === 'TERTIARY'
+         ? 'filter: invert(95%) sepia(10%) saturate(1724%) hue-rotate(343deg) brightness(106%) contrast(96%);'
+         : props.color === 'RED'
+         ? 'filter: invert(30%) sepia(60%) saturate(2262%) hue-rotate(339deg) brightness(85%) contrast(104%);'
+         : props.color === 'GREEN BOLD'
+         ? 'filter: invert(42%) sepia(58%) saturate(1419%) hue-rotate(109deg) brightness(92%) contrast(83%);'
          : ''}
 `;
 
@@ -25,7 +33,9 @@ type SvgIcons =
    | 'check-circle'
    | 'user-add'
    | 'trash'
-   | 'erase';
+   | 'erase'
+   | 'shape-circle'
+   | 'close';
 
 interface SvgIconsProps {
    name: SvgIcons;
@@ -39,6 +49,8 @@ export const SvgIcon = ({ name, color }: SvgIconsProps) => {
       'user-add': svgUserAdd,
       trash: svgTrash,
       erase: svgErase,
+      'shape-circle': svgShapeCircle,
+      close: svgClose,
    };
    return <Img src={svgIcon[name]} color={color} />;
 };

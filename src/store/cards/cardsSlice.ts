@@ -44,8 +44,12 @@ export const cardsSlice = createSlice({
             (card) => card.id === action.payload
          )[0];
       },
+      unselectCard: (state) => {
+         state.selectedCard = null;
+      },
    },
 });
 
 // Action creators are generated for each case reducer function
-export const { selectCollectionById, selectCardById } = cardsSlice.actions;
+export const { selectCollectionById, selectCardById, unselectCard } =
+   cardsSlice.actions;

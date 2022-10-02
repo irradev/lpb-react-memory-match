@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import tw from 'tailwind-styled-components';
-import { useAppSelector } from '../../hooks';
-import { ScreenTitle } from '../atoms';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { showAsideInfo } from '../../store';
+import { ScreenTitle, ToggleAsideButton } from '../atoms';
 import { AsideInfoCard, MainMenu } from '../molecules';
 
 const FixContainer = tw.div`
@@ -57,6 +58,7 @@ interface AsideContainerStyleProps {
    $isShow: boolean;
    $hiddenDirection: 'LEFT' | 'RIGHT';
    $isFloat?: boolean;
+   $isSelectedCard?: 'selected' | 'non-selected';
 }
 const AsideContainer = tw.div<AsideContainerStyleProps>`
    flex-shrink-0
@@ -66,14 +68,14 @@ const AsideContainer = tw.div<AsideContainerStyleProps>`
    border
    border-tertiary
    max-h-full
-   overflow-auto
+   
    ${(p) => p.$margin && p.$margin}
    ${(p) => (p.$width ? 'w-56' : `w-full max-w-sm`)}
    rounded-md
    mb-4
    relative
 
-   transition-transform duration-300 ease-in-out
+   transition-all duration-500 ease-in-out
    ${(props) =>
       props.$isShow
          ? `
@@ -90,6 +92,32 @@ const AsideContainer = tw.div<AsideContainerStyleProps>`
    ${(props) => props.$isFloat && 'absolute'}
    ${(props) => (props.$hiddenDirection === 'LEFT' ? 'left-0' : 'right-0')}
 
+   
+   
+   ${(props) =>
+      props.$isSelectedCard
+         ? `
+            ${props.$isSelectedCard === 'selected' && 'opacity-100'}
+            ${props.$isSelectedCard === 'non-selected' && 'opacity-0'}
+   `
+         : ''}
+
+
+`;
+
+const ToggleAsideContainer = tw.div`
+   flex
+   justify-start items-center   
+   absolute
+   top-0
+   -left-6
+   h-full
+`;
+
+const AsideChildContainer = tw.div`
+   w-full
+   h-full
+   overflow-auto
 `;
 
 const OutletContainer = tw.div`
@@ -106,14 +134,16 @@ const OutletContainer = tw.div`
 `;
 
 export const AppTemplate = () => {
-   const { isShowAsideInfo } = useAppSelector((state) => state.ui);
+   const dispatch = useAppDispatch();
+   const { isShowAsideInfo, pageTitle } = useAppSelector((state) => state.ui);
+   const { selectedCard } = useAppSelector((state) => state.cards);
 
    return (
       <FixContainer>
          <MaxWidthContent>
             <FlexContainer>
                <TitleContainer>
-                  <ScreenTitle text="--" />
+                  <ScreenTitle text={pageTitle} />
                </TitleContainer>
 
                <BodyContainer>
@@ -123,7 +153,9 @@ export const AppTemplate = () => {
                      $isShow={true}
                      $hiddenDirection="LEFT"
                   >
-                     <MainMenu />
+                     <AsideChildContainer>
+                        <MainMenu />
+                     </AsideChildContainer>
                   </AsideContainer>
                   <OutletContainer>
                      <Outlet />
@@ -133,9 +165,22 @@ export const AppTemplate = () => {
                      $isShow={isShowAsideInfo}
                      $hiddenDirection="RIGHT"
                      $isFloat={true}
+                     $isSelectedCard={
+                        selectedCard ? 'selected' : 'non-selected'
+                     }
                   >
-                     <AsideInfoCard />
-                     <button>right</button>
+                     <AsideChildContainer>
+                        <AsideInfoCard />
+                     </AsideChildContainer>
+                     <ToggleAsideContainer>
+                        <ToggleAsideButton
+                           isActive={isShowAsideInfo}
+                           direction="RIGHT"
+                           onClick={() =>
+                              dispatch(showAsideInfo(!isShowAsideInfo))
+                           }
+                        />
+                     </ToggleAsideContainer>
                   </AsideContainer>
                </BodyContainer>
             </FlexContainer>

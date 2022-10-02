@@ -14,6 +14,11 @@ type Player = {
 export interface playersState {
    players: Player[];
    selectedPlayer: Player | null;
+   strikes: {
+      total: number;
+      current: number;
+   };
+   reloadGame: boolean;
 }
 
 const initialState: playersState = {
@@ -28,6 +33,11 @@ const initialState: playersState = {
       },
    ],
    selectedPlayer: null,
+   strikes: {
+      total: 5,
+      current: 0,
+   },
+   reloadGame: false,
 };
 
 export const playersSlice = createSlice({
@@ -50,17 +60,44 @@ export const playersSlice = createSlice({
             (player) => player.id === action.payload
          )[0];
       },
+      updateWinScoreToSelectedPlayer: (
+         state,
+         action: PayloadAction<number>
+      ) => {
+         state.players = state.players.map((player) => {
+            if (player.id === state.selectedPlayer!.id) {
+               player.score.wins = action.payload;
+            }
+            return player;
+         });
+      },
+      updateLossScoreToSelectedPlayer: (
+         state,
+         action: PayloadAction<number>
+      ) => {
+         state.players = state.players.map((player) => {
+            if (player.id === state.selectedPlayer!.id) {
+               player.score.losses = action.payload;
+            }
+            return player;
+         });
+      },
       cleanScoresByPlayerId: (state, action: PayloadAction<string>) => {
          let index = state.players.findIndex(
             (player) => player.id === action.payload
          );
-         console.log(state.players[index].name);
          state.players[index].score = { wins: 0, losses: 0 };
       },
       deletePlayerById: (state, action: PayloadAction<string>) => {
          state.players = state.players.filter(
             (player) => player.id !== action.payload
          );
+      },
+      setCurrentStrikes: (state, action: PayloadAction<number>) => {
+         state.strikes.current = action.payload;
+      },
+      setReloadGame: (state, action: PayloadAction<boolean>) => {
+         state.reloadGame = action.payload;
       },
    },
 });
@@ -69,6 +106,10 @@ export const playersSlice = createSlice({
 export const {
    addNewPlayer,
    selectPlayerById,
+   updateWinScoreToSelectedPlayer,
+   updateLossScoreToSelectedPlayer,
    cleanScoresByPlayerId,
    deletePlayerById,
+   setCurrentStrikes,
+   setReloadGame,
 } = playersSlice.actions;

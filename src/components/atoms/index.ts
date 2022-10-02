@@ -8,5 +8,6 @@ export * from './Modal';
 export * from './ModalWindow';
 export * from './ScreenTitle';
 export * from './SvgIcon';
+export * from './ToggleAsideButton';
 export * as Viewport from './Viewport';
 export * from './WinnerCheckIcon';

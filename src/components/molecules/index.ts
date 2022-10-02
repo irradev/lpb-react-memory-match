@@ -10,4 +10,6 @@ export * from './ModalResetGame';
 export * from './ModalSelectors';
 export * from './PlayerList';
 export * from './PlayersChanger';
+export * from './PlayerStrikes';
+export * from './PrintInfo';
 export * from './RandomGameCards';

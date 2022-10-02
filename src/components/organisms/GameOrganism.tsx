@@ -1,5 +1,10 @@
 import tw from 'tailwind-styled-components';
-import { BackgroundChanger, CollectionsChanger, Game } from '../molecules';
+import {
+   BackgroundChanger,
+   CollectionsChanger,
+   Game,
+   PrintInfo,
+} from '../molecules';
 
 const Container = tw.div`
    inline-flex
@@ -36,11 +41,14 @@ export const GameOrganism = () => {
    return (
       <Container>
          <GameFlex>
-            <BackgroundChanger />
+            {/* <BackgroundChanger /> */}
             <GameWindowContainer>
-               <CollectionsChanger />
+               {/* <CollectionsChanger /> */}
+               <PrintInfo type="PLAYER" />
                <Game />
-               <CollectionsChanger />
+               {/* <CollectionsChanger /> */}
+
+               <PrintInfo type="COLLECTION" />
             </GameWindowContainer>
          </GameFlex>
       </Container>

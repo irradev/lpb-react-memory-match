@@ -2,9 +2,13 @@ import { useRef, useState, useEffect } from 'react';
 import tw from 'tailwind-styled-components';
 import styled from 'styled-components';
 import { numberStringWithZero, shuffleArray } from '../../utils';
-import { useAppDispatch, useOnLoadImages } from '../../hooks';
+import { useAppDispatch, useAppSelector, useOnLoadImages } from '../../hooks';
 import { GameCard, WinnerCheckIcon } from '../atoms';
-import { selectCardById } from '../../store';
+import {
+   selectCardById,
+   showAsideInfo,
+   updateWinScoreToSelectedPlayer,
+} from '../../store';
 
 // grid grid grid-cols-4 grid-flow-row
 const Container = tw.div`
@@ -61,6 +65,8 @@ export const RandomGameCards = ({
    onBadMatch,
 }: RandomCardsProps) => {
    const dispatch = useAppDispatch();
+   const { selectedPlayer } = useAppSelector((state) => state.players);
+
    const { isLoaded, checkImages } = useOnLoadImages();
    const secondsToMemorize = 5;
 
@@ -86,6 +92,7 @@ export const RandomGameCards = ({
             setSelectedCards([...selectedCards, { id, index }]);
          } else if (winnerCardIds.includes(id)) {
             dispatch(selectCardById(id));
+            dispatch(showAsideInfo(true));
          }
       }
    };
@@ -111,9 +118,16 @@ export const RandomGameCards = ({
       return winnerCardIds.includes(id);
    };
 
-   // useEffect(() => {
-   //    console.log(winnerCardIds);
-   // }, [winnerCardIds]);
+   useEffect(() => {
+      console.log(winnerCardIds.length, gameCards.length / 2);
+      if (winnerCardIds.length > 0 && gameCards.length > 0) {
+         if (winnerCardIds.length === gameCards.length / 2) {
+            dispatch(
+               updateWinScoreToSelectedPlayer(selectedPlayer!.score.wins + 1)
+            );
+         }
+      }
+   }, [winnerCardIds]);
 
    useEffect(() => {
       if (gameCards.length > 0) {

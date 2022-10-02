@@ -43,7 +43,7 @@ const CollectionText = tw.span`
 `;
 
 interface ModalSelectorsProps {
-   closeModal: () => {};
+   closeModal: () => void;
 }
 
 export const ModalSelectors = ({ closeModal }: ModalSelectorsProps) => {

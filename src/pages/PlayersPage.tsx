@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import tw from 'tailwind-styled-components';
+import { useTitlePage } from '../hooks';
 import { PlayersOrganism } from '../components/organisms';
 
 const Container = tw.div`
@@ -11,6 +13,8 @@ const Container = tw.div`
 `;
 
 export const PlayersPage = () => {
+   useTitlePage('Players');
+
    return (
       <Container>
          <PlayersOrganism />
