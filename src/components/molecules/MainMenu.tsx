@@ -16,8 +16,8 @@ export const MainMenu = () => {
          <ButtonMenu text="New Game" to="/" />
          <ButtonMenu text="Players" to="/players" />
          <ButtonMenu text="Score" to="/score" />
-         <ButtonMenu text="Settings" to="/settings" />
-         <ButtonMenu text="About" />
+         {/* <ButtonMenu text="Settings" to="/settings" /> */}
+         {/* <ButtonMenu text="About" /> */}
       </Container>
    );
 };
