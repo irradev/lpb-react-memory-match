@@ -15,7 +15,6 @@ export const PlayersChanger = () => {
    );
 
    useEffect(() => {
-      console.log('useEffect collections changer');
       setHorizontalItems(
          players.map((player) => ({
             value: player.id,

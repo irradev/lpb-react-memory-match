@@ -4,7 +4,7 @@ import { CardsCollection } from '../../store/cards/cardsSlice';
 
 export const animatedAnimalsCollection: CardsCollection = {
    id: v4(),
-   name: 'Gplyphy Animals',
+   name: 'Giphy Animals',
    description: 'Descubre los animales en divertidas cartas animadas.',
    backgroundImage:
       'https://www.hogarmania.com/archivos/202109/animales-felices-portada-668x400x80xX-1.jpg',

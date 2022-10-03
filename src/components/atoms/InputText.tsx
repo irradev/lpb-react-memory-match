@@ -12,7 +12,7 @@ const InputTextStyles = styled.input`
 `;
 
 interface InputTextProps {
-   ref: any;
+   refer: any;
    autoComplete: string;
    type: string;
    name: string;
@@ -22,7 +22,7 @@ interface InputTextProps {
 }
 
 export const InputText = ({
-   ref,
+   refer,
    autoComplete,
    type,
    name,
@@ -32,7 +32,7 @@ export const InputText = ({
 }: InputTextProps) => {
    return (
       <InputTextStyles
-         ref={ref}
+         ref={refer ? refer : null}
          autoComplete={autoComplete}
          type={type}
          name={name}

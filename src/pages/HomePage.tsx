@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { setReloadGame, showAsideInfo, unselectCard } from '../store';
+import {
+   setCurrentStrikes,
+   setReloadGame,
+   showAsideInfo,
+   showMenu,
+   unselectCard,
+} from '../store';
 import { useAppDispatch, useAppSelector, useTitlePage } from '../hooks';
 
 import { GameOrganism } from '../components/organisms';
@@ -35,6 +41,7 @@ export const HomePage = () => {
       if (routeKeyRef.current !== location.key) {
          setResetGame(true);
          dispatch(showAsideInfo(false));
+         dispatch(showMenu(false));
       }
    }, [location.key]);
 
@@ -42,6 +49,7 @@ export const HomePage = () => {
       if (!startGame) {
          dispatch(showAsideInfo(false));
          dispatch(unselectCard());
+         dispatch(setCurrentStrikes(0));
       }
    }, [startGame]);
 
@@ -49,6 +57,7 @@ export const HomePage = () => {
       if (reloadGame) {
          setStartGame(false);
          dispatch(setReloadGame(false));
+         dispatch(setCurrentStrikes(0));
       }
    }, [reloadGame]);
 

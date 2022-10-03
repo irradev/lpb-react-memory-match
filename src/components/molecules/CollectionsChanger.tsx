@@ -17,7 +17,6 @@ export const CollectionsChanger = () => {
    );
 
    useEffect(() => {
-      console.log('useEffect collections changer');
       setHorizontalItems(
          collections.map((item) => ({
             value: item.id,
@@ -41,7 +40,6 @@ export const CollectionsChanger = () => {
 
    useEffect(() => {
       if (horizontalItems.length > 0) {
-         console.log(horizontalItems);
          setSelectedItem(horizontalItems[0].value);
       }
    }, [horizontalItems]);

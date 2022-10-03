@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { setPageTitle } from '../store';
+import { setPageTitle, showMenu } from '../store';
 import { useAppDispatch } from './useRedux';
 
 export const useTitlePage = (name: string) => {
@@ -7,5 +7,6 @@ export const useTitlePage = (name: string) => {
 
    useEffect(() => {
       dispatch(setPageTitle(name));
+      dispatch(showMenu(false));
    }, []);
 };

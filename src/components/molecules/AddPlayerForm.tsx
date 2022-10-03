@@ -85,7 +85,7 @@ export const AddPlayerForm = ({
           `}
          >
             <InputText
-               ref={$inputTextRef}
+               refer={$inputTextRef}
                autoComplete="off"
                type="text"
                name="playerName"

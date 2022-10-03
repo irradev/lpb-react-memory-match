@@ -13,7 +13,7 @@ export const ModalWindow = tw(FullWidth)`
    bg-strongBrown
    border border-tertiary
    p-4
-   max-w-sm
+   max-w-xs md:max-w-sm
    rounded-md
 `;
 

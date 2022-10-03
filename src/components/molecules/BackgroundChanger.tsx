@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import tw from 'tailwind-styled-components';
 import { Changer, ChangerItemProps } from '../atoms';
 
 export const BackgroundChanger = () => {
@@ -24,7 +23,6 @@ export const BackgroundChanger = () => {
    );
 
    useEffect(() => {
-      console.log('useEffect background changer');
       setVerticalItems(
          items.map((item) => ({
             value: item.value,

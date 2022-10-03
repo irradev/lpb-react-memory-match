@@ -32,15 +32,11 @@ interface GameCardProps {
 export const GameCard = ({ imageUrl, isActive }: GameCardProps) => {
    const { selectedCollection } = useAppSelector((state) => state.cards);
 
-   const cardSize = {
-      width: 'w-36',
-      height: 'h-48',
-   };
    return (
       <div
          className={`
-            ${cardSize.width}
-            ${cardSize.height}
+           w-16 sm:w-24 md:w-36
+           h-28 sm:h-36 md:h-48
 
             rounded-lg
             relative

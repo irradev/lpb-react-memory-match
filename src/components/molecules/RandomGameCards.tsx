@@ -110,7 +110,6 @@ export const RandomGameCards = ({
    };
 
    useEffect(() => {
-      console.log(winnerCardIds.length, gameCards.length / 2);
       if (winnerCardIds.length > 0 && gameCards.length > 0) {
          if (winnerCardIds.length === gameCards.length / 2) {
             dispatch(

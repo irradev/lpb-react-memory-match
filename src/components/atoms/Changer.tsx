@@ -5,9 +5,10 @@ import tw from 'tailwind-styled-components';
 import svgChevronDown from '../../assets/svg/chevron_down.svg';
 
 type Position = 'TOP' | 'DOWN' | 'LEFT' | 'RIGHT';
+type Direction = 'horizontal' | 'vertical';
 
 interface ChangerStyleProps {
-   $direction: 'horizontal' | 'vertical';
+   $direction: Direction;
 }
 
 const Container = styled.div<ChangerStyleProps>`
@@ -16,7 +17,7 @@ const Container = styled.div<ChangerStyleProps>`
    align-items: center;
    ${(props) =>
       props.$direction === 'horizontal'
-         ? 'flex-direction: row;'
+         ? 'flex-direction: row; gap: 12px;'
          : 'flex-direction: column;'}
 `;
 
@@ -34,7 +35,7 @@ const Button = styled.button<ButtonProps>`
 const Img = styled.img`
    filter: invert(95%) sepia(10%) saturate(1724%) hue-rotate(343deg)
       brightness(106%) contrast(96%);
-   width: 30px;
+   width: 24px;
 `;
 
 const ItemBoxContainer = styled.div`
@@ -53,7 +54,7 @@ export type ChangerItemProps = {
 };
 
 interface ChangerProps {
-   direction: 'horizontal' | 'vertical';
+   direction: Direction;
    items: ChangerItemProps[];
    onSelect: (value: number | string) => void;
 }
@@ -85,41 +86,86 @@ export const Changer = ({ direction, items, onSelect }: ChangerProps) => {
    }, [selected]);
 
    return (
-      <Container $direction={direction}>
-         <Button
-            onClick={() => handleSelect('LEFT')}
-            $position={direction === 'horizontal' ? 'LEFT' : 'TOP'}
-            className={`
+      <>
+         {direction === 'horizontal' && (
+            <div className="flex flex-col justify-center items-center gap-4">
+               <ItemContent
+                  items={items}
+                  direction={direction}
+                  selected={selected}
+               />
+
+               <Container $direction={direction}>
+                  <ButtonContent
+                     onClick={() => handleSelect('LEFT')}
+                     position="LEFT"
+                  />
+                  <ButtonContent
+                     onClick={() => handleSelect('RIGHT')}
+                     position="RIGHT"
+                  />
+               </Container>
+            </div>
+         )}
+         {direction === 'vertical' && (
+            <Container $direction={direction}>
+               <ButtonContent
+                  onClick={() => handleSelect('LEFT')}
+                  position="TOP"
+               />
+               <ItemContent
+                  items={items}
+                  direction={direction}
+                  selected={selected}
+               />
+               <ButtonContent
+                  onClick={() => handleSelect('RIGHT')}
+                  position="DOWN"
+               />
+            </Container>
+         )}
+      </>
+   );
+};
+
+interface ItemContentProps {
+   items: ChangerItemProps[];
+   direction: Direction;
+   selected: number;
+}
+
+const ItemContent = ({ items, direction, selected }: ItemContentProps) => {
+   return (
+      <ItemBoxContainer>
+         {items.map((item, index) => (
+            <ItemBox
+               key={`item_${direction}_${index}`}
+               $selected={index === selected}
+            >
+               {item.content}
+            </ItemBox>
+         ))}
+      </ItemBoxContainer>
+   );
+};
+
+interface ButtonContentPros {
+   onClick: () => void;
+   position: Position;
+}
+const ButtonContent = ({ onClick, position }: ButtonContentPros) => {
+   return (
+      <Button
+         onClick={onClick}
+         $position={position}
+         className={`
                p-1
                border
                border-primary
                rounded-md
             `}
-         >
-            <Img src={svgChevronDown} />
-         </Button>
-         <ItemBoxContainer>
-            {items.map((item, index) => (
-               <ItemBox
-                  key={`item_${direction}_${index}`}
-                  $selected={index === selected}
-               >
-                  {item.content}
-               </ItemBox>
-            ))}
-         </ItemBoxContainer>
-         <Button
-            onClick={() => handleSelect('RIGHT')}
-            $position={direction === 'horizontal' ? 'RIGHT' : 'DOWN'}
-            className={`
-               p-1
-               border
-               border-primary
-               rounded-md
-            `}
-         >
-            <Img src={svgChevronDown} />
-         </Button>
-      </Container>
+      >
+         <Img src={svgChevronDown} />
+      </Button>
    );
 };

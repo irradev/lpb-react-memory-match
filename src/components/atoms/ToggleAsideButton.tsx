@@ -20,22 +20,25 @@ export const ToggleAsideButton = ({
             justify-center
             items-center
 
-            ${direction === 'LEFT' && 'transform: -rotate-90'}
-            ${direction === 'RIGHT' && 'transform: rotate-90'}
             
             transition-transform duration-500 ease-in-out
             
             ${
-               isActive &&
-               `
-               ${direction === 'LEFT' && 'transform: rotate-90'}
-               ${direction === 'RIGHT' && 'transform: -rotate-90'}
-            `
+               isActive
+                  ? `      
+                  ${direction === 'LEFT' && 'transform: rotate-90'}
+                  ${direction === 'RIGHT' && 'transform: -rotate-90'}
+                  `
+                  : `
+                  ${direction === 'LEFT' && 'transform: -rotate-90'}
+                  ${direction === 'RIGHT' && 'transform: rotate-90'}
+                  `
             }
 
             bg-primary
             w-10 h-8
             rounded-full
+            
          `}
       >
          <SvgIcon name="chevron-down" color="TERTIARY" />
