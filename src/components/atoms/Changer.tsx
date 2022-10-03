@@ -111,6 +111,12 @@ export const Changer = ({ direction, items, onSelect }: ChangerProps) => {
          <Button
             onClick={() => handleSelect('RIGHT')}
             $position={direction === 'horizontal' ? 'RIGHT' : 'DOWN'}
+            className={`
+               p-1
+               border
+               border-primary
+               rounded-md
+            `}
          >
             <Img src={svgChevronDown} />
          </Button>

@@ -2,53 +2,47 @@ import { v4 } from 'uuid';
 
 import { CardsCollection } from '../../store/cards/cardsSlice';
 
-export const oldPicturesCollection: CardsCollection = {
+export const animatedAnimalsCollection: CardsCollection = {
    id: v4(),
-   name: 'Famosas Pinturas Antiguas',
-   description: 'Descubre 5 de las famosas pinturas de todos los tiempos.',
+   name: 'Gplyphy Animals',
+   description: 'Descubre los animales en divertidas cartas animadas.',
    backgroundImage:
-      'https://media.timeout.com/images/105798187/750/562/image.jpg',
+      'https://www.hogarmania.com/archivos/202109/animales-felices-portada-668x400x80xX-1.jpg',
    cards: [
       {
          id: v4(),
-         name: 'La Gioconda (Mona Lisa) - Leonardo da Vinci',
-         imageUrl:
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Mona_Lisa.jpg/158px-Mona_Lisa.jpg',
-         info: 'Su nombre, La Gioconda (la Alegre, en castellano), deriva de la tesis más aceptada acerca de la identidad de la modelo: la esposa de Francesco Bartolomeo de Giocondo, que realmente se llamaba Lisa Gherardini, de donde viene su otro nombre: Monna (señora, en el italiano antiguo) Lisa.',
-         moreInfoUrl: 'https://es.wikipedia.org/wiki/La_Gioconda',
+         name: 'Tigre de Bengala',
+         imageUrl: 'https://media.giphy.com/media/LYtrkBQ29eMmptYSK1/giphy.gif',
+         info: 'El tigre de Bengala, también conocido como tigre de Bengala real o tigre indio, es una subespecie de tigre que habita en la India, Nepal, Bangladés, Bután, Birmania y Tíbet.',
+         moreInfoUrl: 'https://es.wikipedia.org/wiki/Panthera_tigris_tigris',
       },
       {
          id: v4(),
-         name: 'Guernica (cuadro) - Pablo Picasso',
-         imageUrl:
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Mural_del_Gernika.jpg/320px-Mural_del_Gernika.jpg',
-         info: 'Su interpretación en profundidad es objeto de controversia, ya que varias figuras son simbólicas y suscitan opiniones dispares; pero su valor artístico está fuera de discusión. No solo es considerado una de las obras más importantes del arte del siglo xx, sino que se ha convertido en un auténtico «icono del siglo xx», símbolo de los terribles sufrimientos que la guerra inflige a los seres humanos.',
-         moreInfoUrl: 'https://es.wikipedia.org/wiki/Guernica_(cuadro)',
+         name: 'Ailuropoda melanoleuca (Panda)',
+         imageUrl: 'https://media.giphy.com/media/EatwJZRUIv41G/giphy.gif',
+         info: 'El principal alimento del panda es el bambú (en torno al 99 % de su dieta), aunque también se alimenta de frutos, pequeños mamíferos, peces e insectos.5​ Es un buen trepador, aunque rara vez se le ve en los árboles. Se adapta a la cautividad y gracias a su pelaje soporta fácilmente las condiciones invernales de su hábitat.',
+         moreInfoUrl: 'https://es.wikipedia.org/wiki/Ailuropoda_melanoleuca',
       },
       {
          id: v4(),
-         name: 'La noche estrellada - Vincent Van Gogh',
-         imageUrl:
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg/303px-Van_Gogh_-_Starry_Night_-_Google_Art_Project.jpg',
-         info: 'A raíz de la crisis sufrida el 23 de diciembre de 1888 que resultó en la automutilación de su oreja izquierda,Van Gogh ingresó voluntariamente en el manicomio de Saint-Paul-de-Mausole el 8 de mayo de 1889. Ubicado en un antiguo monasterio, Saint-Paul-de-Mausole que atendía a los ricos y estaba a menos de la mitad de su capacidad cuando llegó Van Gogh, lo que le permitió ocupar no solo un dormitorio en el segundo piso, sino también una habitación en la planta baja para utilizar como estudio de pintura',
-         moreInfoUrl: 'https://es.wikipedia.org/wiki/La_noche_estrellada',
+         name: 'Tortuga',
+         imageUrl: 'https://media.giphy.com/media/HsGvB8tdhVVC0/giphy.gif',
+         info: 'También conocidos como quelonios, las tortugas son un tipo de reptiles caracterizados por el sólido caparazón que protege sus órganos vitales del que emergen la cabeza, las patas y la cola. A pesar de que carecen de dientes, cuentan con un fuerte pico que usan para alimentarse. Además de plantas, también comen insectos, caracoles y lombrices.',
+         moreInfoUrl: 'https://www.nationalgeographic.com.es/animales/tortugas',
       },
       {
          id: v4(),
-         name: 'La última cena - Leonardo da Vinci',
-         imageUrl:
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/The_Last_Supper_-_Leonardo_Da_Vinci_-_High_Resolution_32x16.jpg/320px-The_Last_Supper_-_Leonardo_Da_Vinci_-_High_Resolution_32x16.jpg',
-         info: 'La última cena (en italiano: Il cenacolo o L’ultima cena) es una pintura mural original de Leonardo da Vinci ejecutada entre 1495 y 1498. Muchos expertos e historiadores del arte consideran La última cena como una de las mejores obras pictóricas del mundo.',
-         moreInfoUrl:
-            'https://es.wikipedia.org/wiki/La_%C3%BAltima_cena_(Leonardo_da_Vinci)',
+         name: 'Medusa',
+         imageUrl: 'https://media.giphy.com/media/l3vQZjy1HKDu8m48M/giphy.gif',
+         info: 'Las medusas (Medusozoa), también llamadas aguamalas, malaguas, aguavivas, aguacuajito, aguacuajada, o lágrimas de mar, son animales marinos. Para desplazarse por el agua se impulsan por contracciones rítmicas de todo su cuerpo; toman agua, que se introduce en su cavidad gastrovascular, y la expulsan usándola como "propulsor".',
+         moreInfoUrl: 'https://es.wikipedia.org/wiki/Medusozoa',
       },
       {
          id: v4(),
-         name: 'La joven de la perla',
-         imageUrl:
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Meisje_met_de_parel.jpg/205px-Meisje_met_de_parel.jpg',
-         info: 'La joven de la perla (en neerlandés Het meisje met de parel), también conocida como Muchacha con turbante, es una de las obras maestras del pintor neerlandés Johannes Vermeer realizada entre 1665 y 1667. Como el nombre indica, utiliza un pendiente de perla como punto focal. La pintura se encuentra actualmente en el museo Mauritshuis de La Haya.',
-         moreInfoUrl: 'https://es.wikipedia.org/wiki/La_joven_de_la_perla',
+         name: 'Oryctolagus cuniculus (Conejo)',
+         imageUrl: 'https://media.giphy.com/media/qQWufo6HvuGtO/giphy.gif',
+         info: 'El conejo común o conejo europeo (Oryctolagus cuniculus) es una especie de mamífero lagomorfo de la familia Leporidae, y el único miembro actual del género Oryctolagus. Mide hasta 50 cm y su masa puede ser hasta 2.5 kg. Ha sido introducido en varios continentes y es la especie que se utiliza en la cocina y en la cunicultura. Está incluido en la lista 100 de las especies exóticas invasoras más dañinas del mundo de la Unión Internacional para la Conservación de la Naturaleza. Su introducción en Australia es uno de los capítulos más importantes del deterioro causado por especies exóticas invasoras.',
+         moreInfoUrl: 'https://es.wikipedia.org/wiki/Oryctolagus_cuniculus',
       },
    ],
 };

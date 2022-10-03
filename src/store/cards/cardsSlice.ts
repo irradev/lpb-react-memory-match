@@ -1,6 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { oldPicturesCollection } from '../../data/gameCards';
+import {
+   animatedAnimalsCollection,
+   oldPicturesCollection,
+} from '../../data/gameCards';
 
 type GameCard = {
    id: string;
@@ -25,7 +28,7 @@ export interface CardsStateProps {
 }
 
 const initialState: CardsStateProps = {
-   collections: [oldPicturesCollection],
+   collections: [oldPicturesCollection, animatedAnimalsCollection],
    selectedCollection: null,
    selectedCard: null,
 };

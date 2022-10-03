@@ -119,7 +119,10 @@ export const AppTemplate = () => {
                   >
                      <Outlet />
                   </div>
-                  <div className={`${asideContainerClassName} ${asideRight}`}>
+                  <div
+                     className={`${asideContainerClassName} ${asideRight}`}
+                     style={{ position: 'absolute' }}
+                  >
                      <div className="w-full h-full overflow-auto">
                         <AsideInfoCard />
                      </div>

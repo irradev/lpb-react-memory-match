@@ -29,6 +29,7 @@ export const CollectionsChanger = () => {
                      items-center
                      w-full
                      h-6
+                     text-center
                `}
                >
                   <span>{item.name}</span>
