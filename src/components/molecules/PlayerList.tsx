@@ -4,43 +4,8 @@ import tw from 'tailwind-styled-components';
 import { Button, SvgIcon } from '../atoms';
 import { useLocation } from 'react-router-dom';
 
-const Table = tw.table`
-   w-full
-   max-w-full
-   border-separate
-   border-spacing-0
-
-`;
-
-const Thead = tw.thead`
-   bg-strongBrown
-   sticky
-   top-0
-
-`;
-
 const ThHead = tw.th`
-   py-4
-   px-3
-   border-b
-   border-tertiary
-`;
-
-const Tbody = tw.tbody`
-   pt-2
-`;
-
-const Td = tw.td`
-   py-6
-   px-3
-`;
-
-const ContainerActionButtons = tw.div`
-   flex
-   justify-center
-   items-center
-   gap-1
-   w-full
+   py-4 px-3 border-b border-tertiary
 `;
 
 const WinNumber = tw.span`
@@ -74,9 +39,17 @@ export const PlayerList = () => {
       }
    };
 
+   const tdClassName = 'py-6 px-3';
    return (
-      <Table>
-         <Thead>
+      <table
+         className={`
+            w-full
+            max-w-full
+            border-separate
+            border-spacing-0
+      `}
+      >
+         <thead className="py-4 px-3 border-b border-tertiary">
             <tr>
                <ThHead style={{ minWidth: '120px', textAlign: 'left' }}>
                   NAME
@@ -93,23 +66,40 @@ export const PlayerList = () => {
                   </ThHead>
                )}
             </tr>
-         </Thead>
-         <Tbody>
+         </thead>
+         <tbody className="pt-2">
             {/* <DummyList /> */}
             {players.map((player) => (
                <tr key={`player_${player.id}`}>
-                  <Td style={{ minWidth: '120px', textAlign: 'left' }}>
+                  <td
+                     className={tdClassName}
+                     style={{ minWidth: '120px', textAlign: 'left' }}
+                  >
                      {player.name}
-                  </Td>
-                  <Td style={{ minWidth: '80px', textAlign: 'center' }}>
+                  </td>
+                  <td
+                     className={tdClassName}
+                     style={{ minWidth: '80px', textAlign: 'center' }}
+                  >
                      <WinNumber>{player.score.wins}</WinNumber>
-                  </Td>
-                  <Td style={{ minWidth: '80px', textAlign: 'center' }}>
+                  </td>
+                  <td
+                     className={tdClassName}
+                     style={{ minWidth: '80px', textAlign: 'center' }}
+                  >
                      <LossNumber>{player.score.losses}</LossNumber>
-                  </Td>
+                  </td>
                   {location.pathname === '/players' && (
                      <td style={{ minWidth: '180px', textAlign: 'center' }}>
-                        <ContainerActionButtons>
+                        <div
+                           className={`
+                              flex
+                              justify-center
+                              items-center
+                              gap-1
+                              w-full
+                        `}
+                        >
                            <Button
                               onClick={() =>
                                  handleCleanPlayerScores(player.id, player.name)
@@ -126,16 +116,17 @@ export const PlayerList = () => {
                            >
                               <SvgIcon name="trash" color="WHITE" />
                            </Button>
-                        </ContainerActionButtons>
+                        </div>
                      </td>
                   )}
                </tr>
             ))}
-         </Tbody>
-      </Table>
+         </tbody>
+      </table>
    );
 };
 
+/*
 const DummyList = () => {
    return (
       <>
@@ -242,3 +233,4 @@ const DummyList = () => {
       </>
    );
 };
+*/

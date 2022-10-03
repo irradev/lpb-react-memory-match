@@ -2,17 +2,6 @@ import { useEffect, useState } from 'react';
 import tw from 'tailwind-styled-components';
 import { Changer, ChangerItemProps } from '../atoms';
 
-const ItemBox = tw.div`
-   flex
-   flex-center items-center
-   w-12 h-22
-   p-2
-   overflow-hidden
-   rounded-lg
-   shadow-md
-   bg-stone-700
-`;
-
 export const BackgroundChanger = () => {
    const items = [
       {
@@ -39,7 +28,22 @@ export const BackgroundChanger = () => {
       setVerticalItems(
          items.map((item) => ({
             value: item.value,
-            content: <ItemBox>{item.content}</ItemBox>,
+            content: (
+               <div
+                  className={`
+                     flex
+                     flex-center items-center
+                     w-12 h-22
+                     p-2
+                     overflow-hidden
+                     rounded-lg
+                     shadow-md
+                     bg-stone-700
+            `}
+               >
+                  {item.content}
+               </div>
+            ),
          }))
       );
    }, []);

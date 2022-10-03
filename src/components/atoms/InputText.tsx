@@ -1,5 +1,7 @@
+import { ChangeEvent } from 'react';
 import styled from 'styled-components';
-import tw from 'tailwind-styled-components';
+
+//Todo: this is a bad implementation, work on it
 
 const InputTextStyles = styled.input`
    &:focus {
@@ -9,13 +11,44 @@ const InputTextStyles = styled.input`
    }
 `;
 
-export const InputText = tw(InputTextStyles)`
-   block
-   bg-strongBrown
-   border-b
-   border-primary
-   text-tertiary
-   py-1 px-1
-   w-full
-   placeholder:italic placeholder:text-tertiary placeholder:opacity-70
-`;
+interface InputTextProps {
+   ref: any;
+   autoComplete: string;
+   type: string;
+   name: string;
+   value: string;
+   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+   placeholder: string;
+}
+
+export const InputText = ({
+   ref,
+   autoComplete,
+   type,
+   name,
+   value,
+   onChange,
+   placeholder,
+}: InputTextProps) => {
+   return (
+      <InputTextStyles
+         ref={ref}
+         autoComplete={autoComplete}
+         type={type}
+         name={name}
+         value={value}
+         onChange={onChange}
+         placeholder={placeholder}
+         className={`
+            block
+            bg-strongBrown
+            border-b
+            border-primary
+            text-tertiary
+            py-1 px-1
+            w-full
+            placeholder:italic placeholder:text-tertiary placeholder:opacity-70
+      `}
+      />
+   );
+};

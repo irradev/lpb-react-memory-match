@@ -1,17 +1,6 @@
 import { ReactNode } from 'react';
 import tw from 'tailwind-styled-components';
 
-const Container = tw.div`
-   bg-window
-   rounded-md
-   border
-   border-primary
-   p-2
-   w-full
-   max-h-full
-   overflow-hidden
-`;
-
 const Content = tw.div`
    max-h-full
    overflow-auto
@@ -23,8 +12,19 @@ interface GameWindowProps {
 
 export const GameWindow = ({ children }: GameWindowProps) => {
    return (
-      <Container>
+      <div
+         className={`
+            bg-window
+            rounded-md
+            border
+            border-primary
+            p-2
+            w-full
+            max-h-full
+            overflow-hidden
+      `}
+      >
          <Content>{children}</Content>
-      </Container>
+      </div>
    );
 };

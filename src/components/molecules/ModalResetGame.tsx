@@ -3,23 +3,6 @@ import tw from 'tailwind-styled-components';
 import { AlertType } from '../../pages';
 import { Modal, Button } from '../atoms';
 
-const ContainerModalNewGame = tw.div`
-   flex
-   flex-col
-   justify-center
-   items-center
-   gap-5
-   text-2xl
-`;
-
-const ActionButtons = tw.div`
-   flex
-   justify-between
-   items-center
-   w-full
-   gap-5
-`;
-
 interface ModalResetGame {
    resetGame: boolean;
    setStartGame: Dispatch<SetStateAction<boolean>>;
@@ -61,17 +44,26 @@ export const ModalResetGame = ({
 
    return (
       <Modal isActive={resetGame} onClose={() => onCloseModal()}>
-         <ContainerModalNewGame>
+         <div
+            className={`
+               flex
+               flex-col
+               justify-center
+               items-center
+               gap-5
+               text-2xl
+         `}
+         >
             <span>¿Start a new game?</span>
-            <ActionButtons>
+            <div className="flex justify-between items-center w-full gap-5">
                <Button onClick={handleCancelResetGame} styleType="DANGER">
                   cancel
                </Button>
                <Button onClick={handleStartNewGame} styleType="SUCCESS">
                   new game
                </Button>
-            </ActionButtons>
-         </ContainerModalNewGame>
+            </div>
+         </div>
       </Modal>
    );
 };

@@ -1,33 +1,6 @@
 import tw from 'tailwind-styled-components';
 import { SvgIcon } from './SvgIcon';
 
-interface ButtonStyleProps {
-   $direction: 'LEFT' | 'RIGHT';
-   $isActive: boolean;
-}
-const Button = tw.button<ButtonStyleProps>`
-   flex
-   justify-center
-   items-center
-
-   ${(props) => props.$direction === 'LEFT' && 'transform: -rotate-90'}
-   ${(props) => props.$direction === 'RIGHT' && 'transform: rotate-90'}
-   
-   transition-transform duration-500 ease-in-out
-   
-   ${(props) =>
-      props.$isActive &&
-      `
-      ${props.$direction === 'LEFT' && 'transform: rotate-90'}
-      ${props.$direction === 'RIGHT' && 'transform: -rotate-90'}
-   `}
-
-   bg-primary
-   w-10 h-8
-   rounded-full
-   
-`;
-
 interface ToggleAsideButtonProps {
    onClick: () => void;
    direction: 'LEFT' | 'RIGHT';
@@ -40,8 +13,32 @@ export const ToggleAsideButton = ({
    isActive,
 }: ToggleAsideButtonProps) => {
    return (
-      <Button onClick={onClick} $direction={direction} $isActive={isActive}>
+      <button
+         onClick={onClick}
+         className={`
+            flex
+            justify-center
+            items-center
+
+            ${direction === 'LEFT' && 'transform: -rotate-90'}
+            ${direction === 'RIGHT' && 'transform: rotate-90'}
+            
+            transition-transform duration-500 ease-in-out
+            
+            ${
+               isActive &&
+               `
+               ${direction === 'LEFT' && 'transform: rotate-90'}
+               ${direction === 'RIGHT' && 'transform: -rotate-90'}
+            `
+            }
+
+            bg-primary
+            w-10 h-8
+            rounded-full
+         `}
+      >
          <SvgIcon name="chevron-down" color="TERTIARY" />
-      </Button>
+      </button>
    );
 };

@@ -11,13 +11,6 @@ import {
 } from '../../store';
 
 // grid grid grid-cols-4 grid-flow-row
-const Container = tw.div`
-   flex
-   flex-wrap
-   justify-center
-   align-start
-   gap-2
-`;
 
 const TopInfoContainer = styled.div<{ isShowingInfo: boolean }>`
    width: 100%;
@@ -40,8 +33,6 @@ const InfoText = tw.div<{ $isRendering: boolean; $isActive: boolean }>`
    top-0
    left-0
 `;
-
-const ContainerGameCard = tw.div` relative`;
 
 export interface ICardInGame {
    id: string;
@@ -189,17 +180,40 @@ export const RandomGameCards = ({
                Loading Images
             </InfoText>
 
-            <InfoText $isRendering={false} $isActive={showCountdown}>
+            <div
+               className={`
+                  flex
+                  justify-center
+                  items-center
+                  ${showCountdown ? 'opacity-100' : 'opacity-0'}
+                  transition-opacity ease-out delay-300
+                  w-full
+                  h-full
+                  absolute
+                  top-0
+                  left-0
+               `}
+            >
                Memorize Now!{' '}
                <span ref={$timerTextRef} style={{ marginLeft: '12px' }}></span>
-            </InfoText>
+            </div>
          </TopInfoContainer>
 
-         <Container ref={$containerRef}>
+         <div
+            ref={$containerRef}
+            className={`
+               flex
+               flex-wrap
+               justify-center
+               align-start
+               gap-2
+            `}
+         >
             {gameCards.map((card, index) => (
-               <ContainerGameCard
+               <div
                   key={'card_game_' + card.id + '_' + index}
                   onClick={() => handleSelectCard(card.id, index)}
+                  className="relative"
                >
                   <GameCard
                      imageUrl={card.imageUrl}
@@ -210,9 +224,9 @@ export const RandomGameCards = ({
                      isWinner={checkIfWinnerCard(card.id)}
                      styles={{ position: 'absolute', top: '3px', right: '3px' }}
                   />
-               </ContainerGameCard>
+               </div>
             ))}
-         </Container>
+         </div>
       </>
    );
 };

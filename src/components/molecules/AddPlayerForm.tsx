@@ -5,33 +5,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import tw from 'tailwind-styled-components';
 import { Button, InputText, ModalWindow } from '../atoms';
 
-const Form = tw.form`
-   flex
-   flex-col
-   justify-center
-   items-center
-   gap-6
-   w-full
-`;
-
-const ErrorSpan = tw.span<{ $isError: boolean }>`
-   !text-red-400
-   text-sm
-   text-bold
-   tracking-normal
-   overflow-hidden
-   -mt-4
-   ${(props) => (props.$isError ? 'max-h-10' : 'max-h-0')}
-   transition-all duration-150 ease-in-out
-`;
-
-const ActionButtons = tw.div`
-   flex
-   justify-between
-   items-center
-   w-full
-`;
-
 interface AddPlayerFormProps {
    isActive: boolean;
    closeModal?: (state: false) => void;
@@ -100,7 +73,17 @@ export const AddPlayerForm = ({
 
    return (
       <ModalWindow>
-         <Form onSubmit={handleSubmit}>
+         <form
+            onSubmit={handleSubmit}
+            className={`
+               flex
+               flex-col
+               justify-center
+               items-center
+               gap-6
+               w-full
+          `}
+         >
             <InputText
                ref={$inputTextRef}
                autoComplete="off"
@@ -110,7 +93,18 @@ export const AddPlayerForm = ({
                onChange={(e) => setPlayerName(e.target.value)}
                placeholder="New Player Name"
             />
-            <ErrorSpan $isError={isError}>
+            <span
+               className={`
+               !text-red-400
+                  text-sm
+                  text-bold
+                  tracking-normal
+                  overflow-hidden
+                  -mt-4
+                  ${isError ? 'max-h-10' : 'max-h-0'}
+                  transition-all duration-150 ease-in-out
+            `}
+            >
                {errorInfo !== '' ? (
                   errorInfo
                ) : (
@@ -122,8 +116,16 @@ export const AddPlayerForm = ({
                         : `Por favor intenta con otro nombre.`}
                   </>
                )}
-            </ErrorSpan>
-            <ActionButtons>
+            </span>
+
+            <div
+               className={`
+                  flex
+                  justify-between
+                  items-center
+                  w-full
+            `}
+            >
                <Button onClick={handleCancel} styleType="DANGER">
                   cancel
                </Button>
@@ -133,8 +135,8 @@ export const AddPlayerForm = ({
                {/* <button type="button" onClick={() => setIsError(!isError)}>
                   toggle
                </button> */}
-            </ActionButtons>
-         </Form>
+            </div>
+         </form>
       </ModalWindow>
    );
 };

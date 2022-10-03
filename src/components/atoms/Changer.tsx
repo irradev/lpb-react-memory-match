@@ -10,26 +10,24 @@ interface ChangerStyleProps {
    $direction: 'horizontal' | 'vertical';
 }
 
-const Container = tw.div<ChangerStyleProps>`
-   flex
-   ${(props) => (props.$direction === 'horizontal' ? 'flex-row' : 'flex-col')}
-   justify-center
-   items-center
-   gap-5
+const Container = styled.div<ChangerStyleProps>`
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   ${(props) =>
+      props.$direction === 'horizontal'
+         ? 'flex-direction: row;'
+         : 'flex-direction: column;'}
 `;
 
 interface ButtonProps {
    $position: Position;
 }
-const Button = tw.button<ButtonProps>`
-   ${(props) => props.$position === 'TOP' && 'transform: rotate-180'}
-   ${(props) => props.$position === 'LEFT' && 'transform: rotate-90'}
-   ${(props) => props.$position === 'RIGHT' && 'transform: -rotate-90'}
-   
-   p-1
-   border
-   border-primary
-   rounded-md
+
+const Button = styled.button<ButtonProps>`
+   ${(props) => props.$position === 'TOP' && 'transform: rotate(180deg);'}
+   ${(props) => props.$position === 'LEFT' && 'transform: rotate(90deg);'}
+   ${(props) => props.$position === 'RIGHT' && 'transform: rotate(-90deg);'}
 `;
 
 //filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(203deg) brightness(102%) contrast(102%);
@@ -39,11 +37,11 @@ const Img = styled.img`
    width: 30px;
 `;
 
-const ItemBoxContainer = tw.div`
-   flex-grow
-   flex
-   justify-center
-   items-center
+const ItemBoxContainer = styled.div`
+   flex-grow: 1;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 `;
 const ItemBox = tw.div<{ $selected: boolean }>`
    ${(props) => (props.$selected ? 'block' : 'hidden')}
@@ -91,6 +89,12 @@ export const Changer = ({ direction, items, onSelect }: ChangerProps) => {
          <Button
             onClick={() => handleSelect('LEFT')}
             $position={direction === 'horizontal' ? 'LEFT' : 'TOP'}
+            className={`
+               p-1
+               border
+               border-primary
+               rounded-md
+            `}
          >
             <Img src={svgChevronDown} />
          </Button>

@@ -2,23 +2,6 @@ import styled from 'styled-components';
 import tw from 'tailwind-styled-components';
 import { useAppSelector } from '../../hooks';
 
-interface GameCardStyleProps {
-   $width: string;
-   $height: string;
-}
-
-const Container = tw.div<GameCardStyleProps>`
-   ${(props) => `
-     ${props.$width} ${props.$height} 
-   `}
-
-   rounded-lg
-   relative
-   cursor-pointer
-
-   hover:border border-tertiary
-`;
-
 const ImageContainer = styled.div<{ isActive: boolean }>`
    width: 100%;
    height: 100%;
@@ -54,7 +37,18 @@ export const GameCard = ({ imageUrl, isActive }: GameCardProps) => {
       height: 'h-48',
    };
    return (
-      <Container $width={cardSize.width} $height={cardSize.height}>
+      <div
+         className={`
+            ${cardSize.width}
+            ${cardSize.height}
+
+            rounded-lg
+            relative
+            cursor-pointer
+
+            hover:border border-tertiary
+         `}
+      >
          <ImageContainer isActive={isActive}>
             <Img src={imageUrl} $isActive={isActive} />
             <Img
@@ -62,6 +56,6 @@ export const GameCard = ({ imageUrl, isActive }: GameCardProps) => {
                $isActive={!isActive}
             />
          </ImageContainer>
-      </Container>
+      </div>
    );
 };

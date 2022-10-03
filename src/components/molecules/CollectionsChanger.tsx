@@ -5,18 +5,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 
 import { Changer, ChangerItemProps } from '../atoms';
 
-const Container = tw.div`
-   mb-4
-`;
-
-const ItemBox = tw.div`
-   flex
-   flex-center
-   items-center
-   w-full
-   h-6
-`;
-
 export const CollectionsChanger = () => {
    const dispatch = useAppDispatch();
    const { collections } = useAppSelector((state) => state.cards);
@@ -34,9 +22,17 @@ export const CollectionsChanger = () => {
          collections.map((item) => ({
             value: item.id,
             content: (
-               <ItemBox>
+               <div
+                  className={`
+                     flex
+                     flex-center
+                     items-center
+                     w-full
+                     h-6
+               `}
+               >
                   <span>{item.name}</span>
-               </ItemBox>
+               </div>
             ),
          }))
       );
@@ -56,12 +52,12 @@ export const CollectionsChanger = () => {
    }, [selectedItem]);
 
    return (
-      <Container>
+      <div className="mb-4">
          <Changer
             direction="horizontal"
             items={horizontalItems}
             onSelect={setSelectedItem}
          />
-      </Container>
+      </div>
    );
 };

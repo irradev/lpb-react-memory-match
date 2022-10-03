@@ -60,16 +60,46 @@ interface ModalProps {
 
 export const Modal = ({ isActive, children, onClose }: ModalProps) => {
    return (
-      <FixContainer $isActive={isActive}>
+      <div
+         className={`
+            flex
+            justify-center
+            items-center
+            bg-transparent
+            ${isActive ? 'opacity-100' : 'opacity-0'}
+            ${isActive ? 'pointer-events-auto' : 'pointer-events-none'}
+                  
+            transition-all duration-300 ease-out
+            w-full h-full
+            fixed top-0 left-0
+      `}
+      >
          <BackgroundContainer
             $isActive={isActive}
             onClick={() => onClose(false)}
          />
-         <Container $isActive={isActive}>
+         {/** CONTAINER */}
+         <div
+            className={`
+               flex
+               justify-center
+               items-center
+               w-full h-full
+               z-10
+               transition-all duration-500 ease-out
+               relative
+               ${
+                  isActive
+                     ? 'transform: translate-y-0'
+                     : 'transform:  -translate-y-1/4'
+               }
+               pointer-events-none
+            `}
+         >
             <ChildContainer onClick={(e) => e.stopPropagation()}>
                {children}
             </ChildContainer>
-         </Container>
-      </FixContainer>
+         </div>
+      </div>
    );
 };

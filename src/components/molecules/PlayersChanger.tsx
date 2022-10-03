@@ -1,21 +1,7 @@
 import { useEffect, useState } from 'react';
 import { selectPlayerById } from '../../store';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
-import tw from 'tailwind-styled-components';
 import { Changer, ChangerItemProps } from '../atoms';
-
-const Container = tw.div`
-   mb-4
-   w-full
-`;
-
-const ItemBox = tw.div`
-   flex
-   flex-center
-   items-center
-   w-full
-   h-6
-`;
 
 export const PlayersChanger = () => {
    const dispatch = useAppDispatch();
@@ -33,7 +19,19 @@ export const PlayersChanger = () => {
       setHorizontalItems(
          players.map((player) => ({
             value: player.id,
-            content: <ItemBox>{player.name}</ItemBox>,
+            content: (
+               <div
+                  className={`
+                     flex
+                     flex-center
+                     items-center
+                     w-full
+                     h-6
+            `}
+               >
+                  {player.name}
+               </div>
+            ),
          }))
       );
    }, [players]);
@@ -51,12 +49,12 @@ export const PlayersChanger = () => {
    }, [selectedItem]);
 
    return (
-      <Container>
+      <div className="mb-4 w-full">
          <Changer
             direction="horizontal"
             items={horizontalItems}
             onSelect={setSelectedItem}
          />
-      </Container>
+      </div>
    );
 };

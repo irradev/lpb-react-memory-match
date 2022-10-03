@@ -2,27 +2,6 @@ import tw from 'tailwind-styled-components';
 import { useAppSelector } from '../../hooks';
 import { PlayerStrikes } from './PlayerStrikes';
 
-const Container = tw.div`
-   flex
-   justify-center
-   items-center
-   w-full
-`;
-
-const PlayerInfoContainer = tw.div`
-   flex
-   justify-around
-   items-center
-   w-full
-`;
-
-const StrikesContainer = tw.div`
-   flex
-   justify-center
-   items-center
-   gap-1
-`;
-
 const CollectionName = tw.span`
    text-2xl
 `;
@@ -33,10 +12,10 @@ interface PrintInfoProps {
 
 export const PrintInfo = ({ type }: PrintInfoProps) => {
    return (
-      <Container>
+      <div className="flex justify-center items-center w-full">
          {type === 'PLAYER' && <PlayerInfo />}
          {type === 'COLLECTION' && <CollectionInfo />}
-      </Container>
+      </div>
    );
 };
 
@@ -44,13 +23,13 @@ const PlayerInfo = () => {
    const { selectedPlayer } = useAppSelector((state) => state.players);
 
    return (
-      <PlayerInfoContainer>
+      <div className="flex justify-around items-center w-full">
          <span>{`Player: ${selectedPlayer?.name}`}</span>
-         <StrikesContainer>
+         <div className="flex justify-center items-center gap-1">
             <span>Strikes: </span>
             <PlayerStrikes />
-         </StrikesContainer>
-      </PlayerInfoContainer>
+         </div>
+      </div>
    );
 };
 
